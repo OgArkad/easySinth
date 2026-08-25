@@ -1,0 +1,28 @@
+{
+  "name": "easysinth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "keywords": [],
+  "type": "module",
+  "homepage": "https://github.com/OgArkad/easySinth#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OgArkad/easySinth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OgArkad/easySinth/issues"
+  },
+  "dependencies": {
+    "tone": "^15.1.22"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2"
+  }
+}
