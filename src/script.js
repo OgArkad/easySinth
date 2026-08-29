@@ -1,4 +1,5 @@
 import MIDI from "./MIDI.js";
+import * as effect from "./effects.js";
 import * as Tone from "tone"; //npm install tone
 //npm run dev localhosthoz, véglegessen pedig npm run build
 const synth = new Tone.PolySynth(Tone.Synth);
@@ -30,6 +31,17 @@ document.getElementById("start")?.addEventListener("click", async (e) => {
             console.error(err);
         }
     }
+    if (midi.access?.inputs.values() === undefined)
+        return;
+    for (const input of midi.access?.inputs.values()) {
+        console.log({
+            id: input.id,
+            name: input.name,
+            manufacturer: input.manufacturer,
+            state: input.state,
+            connection: input.connection
+        });
+    }
     let inp = midi.access?.inputs.values().next().value?.id;
     if (inp)
         midi.selectInput(inp, playSound, releaseSound);
@@ -38,13 +50,13 @@ document.getElementById("start")?.addEventListener("click", async (e) => {
         synth.triggerRelease(e, 0);
     });
     started = true;
+    synth.chain(effect.vibrato, Tone.getDestination());
     console.log("Synth started/reseted!");
 });
 document.addEventListener("keydown", (e) => {
     if (e.repeat || !started)
         return;
     console.log(e.key);
-    console.log(e);
     let note = keyboard[e.key];
     if (note != undefined)
         playnote(note, synth);
